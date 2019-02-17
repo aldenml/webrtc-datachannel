@@ -1,0 +1,22 @@
+language: cpp
+dist: xenial
+
+matrix:
+  fast_finish: true
+  include:
+    - env: target_os=mac target_cpu=x64
+      os: osx
+      osx_image: xcode10.1
+    - env: target_os=linux target_cpu=x64
+#    - env: target_os=android target_cpu=arm
+#    - env: target_os=android target_cpu=arm64
+#    - env: target_os=android target_cpu=x86
+#    - env: target_os=android target_cpu=x64
+
+branches:
+  only:
+    - master
+
+script:
+
+  - ./build-posix.sh -p $target_os -a $target_cpu
