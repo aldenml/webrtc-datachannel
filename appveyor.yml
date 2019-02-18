@@ -9,3 +9,5 @@ os: Visual Studio 2017
 build_script:
 
   - build-win.bat
+
+  - C:\Python37-x64\python.exe package.py --os=win --cpu=x64 --compiler=msvc
