@@ -65,8 +65,8 @@ def main():
 
     git_out = subprocess.run([
         "git", "-C", "src", "rev-parse", "--short", "HEAD"],
-        capture_output=True).stdout
-    git_hash = git_out.decode('ascii').rstrip()
+        stdout=subprocess.PIPE).stdout
+    git_hash = git_out.decode("ascii").rstrip()
     tar_name = "webrtc-datachannel-%s-%s-%s-m73-%s.tar.gz" % (args.os, args.cpu, args.compiler, git_hash)
     make_tarfile(tar_name)
 
