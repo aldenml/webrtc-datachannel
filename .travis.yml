@@ -17,6 +17,17 @@ branches:
   only:
     - master
 
+before_install:
+
+  - if [ $target_os == "linux" ]; then
+      sudo apt-get install -qq python3;
+      export compiler=gcc;
+    else
+      export compiler=clang;
+    fi
+
 script:
 
   - ./build-posix.sh -p $target_os -a $target_cpu
+
+  - python3 package.py --os=$target_os --cpu=$target_cpu --compiler=$compiler
