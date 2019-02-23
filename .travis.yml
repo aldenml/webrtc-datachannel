@@ -32,6 +32,13 @@ script:
 
   - python3 package.py --os=$target_os --cpu=$target_cpu --compiler=$compiler
 
+  - mkdir build && cd build
+  - cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -G "CodeBlocks - Unix Makefiles" ..
+  - cmake --build .
+  - cd ..
+
+  - ./build/examples/loopback_test
+
 before_deploy:
   - mkdir builds
   - mv webrtc-datachannel-*.tar.gz builds
