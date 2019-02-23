@@ -31,3 +31,17 @@ script:
   - ./build-posix.sh -p $target_os -a $target_cpu
 
   - python3 package.py --os=$target_os --cpu=$target_cpu --compiler=$compiler
+
+before_deploy:
+  - mkdir builds
+  - mv webrtc-datachannel-*.tar.gz builds
+
+deploy:
+  provider: s3
+  access_key_id: $S3_ACCESS_KEY
+  secret_access_key: $S3_SECRET_KEY
+  bucket: $S3_BUCKET
+  skip_cleanup: true
+  local_dir: builds
+  on:
+    all_branches: true

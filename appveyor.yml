@@ -11,3 +11,14 @@ build_script:
   - build-win.bat
 
   - C:\Python37-x64\python.exe package.py --os=win --cpu=x64 --compiler=msvc
+
+artifacts:
+  - path: webrtc-datachannel-*.tar.gz
+    name: builds
+
+deploy:
+  provider: S3
+  access_key_id: $(S3_ACCESS_KEY)
+  secret_access_key: $(S3_SECRET_KEY)
+  bucket: $(S3_BUCKET)
+  artifact: builds
